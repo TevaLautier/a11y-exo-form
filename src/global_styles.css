@@ -1,1 +1,22 @@
 /* Add application styles & imports to this file! */
+.registration-container { padding: 20px; font-family: sans-serif; }
+.title { font-size: 24px; font-weight: bold; display: block; margin-bottom: 20px; }
+
+.field-group { margin-bottom: 15px; }
+
+input {
+  display: block;
+  padding: 8px;
+  width: 250px;
+  border: 1px solid #ccc;
+}
+
+/* ERREUR 6 : Utiliser uniquement le rouge pour l'erreur sans icône ni texte d'aide sémantique */
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.date-group { display: flex; gap: 5px; align-items: center; }
+.date-group input { width: 50px; }

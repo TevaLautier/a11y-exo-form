@@ -1,17 +1,35 @@
 import { Component } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  template: `
-    <h1>Hello from {{ name }}!</h1>
-    <a target="_blank" href="https://angular.dev/overview">
-      Learn more about Angular
-    </a>
-  `,
+  templateUrl: './main.html',
+  imports:[ReactiveFormsModule, CommonModule]
 })
 export class App {
-  name = 'Angular';
+  signupForm: FormGroup;
+  submitted = false;
+
+  constructor(private fb: FormBuilder) {
+    this.signupForm = this.fb.group({
+      m_nom: ['', Validators.required],
+      prenom: ['', Validators.required],
+      adresse: ['', Validators.required],
+      jour: ['', [Validators.required, Validators.min(1), Validators.max(31)]],
+      mois: ['', [Validators.required, Validators.min(1), Validators.max(12)]],
+      annee: ['', [Validators.required, Validators.min(1900)]]
+    });
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    if (this.signupForm.valid) {
+      alert('Formulaire envoyé !');
+    }
+  }
+
 }
 
 bootstrapApplication(App);
