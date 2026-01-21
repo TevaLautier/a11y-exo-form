@@ -1,39 +1,52 @@
-<div class="registration-container">
-    <span class="title">Inscription</span>
+<div class="page-container">
+    <!-- ERREUR 1 : Pas de H1, utilise un style visuel uniquement -->
+    <div class="pseudo-title">Formulaire d'inscription</div>
   
-    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form" (ngSubmit)="valider()">
       
-      <div class="field-group">
-        <input type="text" formControlName="m_nom" placeholder="Nom">        
-        <div *ngIf="submitted && signupForm.get('m_nom')?.errors" class="error">
-          Champ invalide
-        </div>
-      </div>
-  
-      <div class="field-group">
+      <div class="section">
+        <!-- ERREUR 2 : Pas de labels, placeholders uniquement -->
+        <input type="text" formControlName="nom" placeholder="Nom">
         <input type="text" formControlName="prenom" placeholder="Prénom">
-        <div *ngIf="submitted && signupForm.get('prenom')?.errors" class="error">
-          Erreur
+        
+        <!-- ERREUR 3 : Message d'erreur non explicite et non lié à l'input -->
+        <p class="err-msg" *ngIf="submitted && (form.get('nom')?.errors || form.get('prenom')?.errors)">
+          Champ(s) invalide(s)
+        </p>
+      </div>
+  
+      <!-- ERREUR 4 : Groupe d'adresse sans structure sémantique (ni fieldset ni legend) -->
+      <div class="section">
+        <p class="label-like">Adresse</p>
+        <input type="text" formControlName="rue" placeholder="Numéro et nom de rue">
+        
+        <div class="row">
+          <!-- ERREUR 5 : Pas d'autocomplete pour aider le remplissage auto -->
+          <input type="text" formControlName="cp" placeholder="Code postal">
+          <input type="text" formControlName="ville" placeholder="Ville">
         </div>
+        
+        <p class="err-msg" *ngIf="submitted && (form.get('rue')?.errors || form.get('cp')?.errors || form.get('ville')?.errors)">
+          Erreur adresse
+        </p>
       </div>
   
-      <div class="field-group">
-        <input type="text" formControlName="adresse" placeholder="Adresse complète">
+      <!-- ERREUR 6 : Date de naissance confuse (3 champs sans contexte pour un lecteur d'écran) -->
+      <div class="section">
+        <p class="label-like">Date de naissance</p>
+        <div class="row">
+          <input type="number" formControlName="jj" placeholder="JJ">
+          <input type="number" formControlName="mm" placeholder="MM">
+          <input type="number" formControlName="aaaa" placeholder="AAAA">
+        </div>
+        <!-- ERREUR 7 : Information d'erreur globale qui ne dit pas quel champ pose problème -->
+        <p class="err-msg" *ngIf="submitted && form.invalid">
+          Vérifiez la saisie
+        </p>
       </div>
   
-      <!-- ERREUR 5 : Date de naissance éclatée sans fieldset ni légende -->
-      <!-- L'utilisateur de lecteur d'écran entend "Saisie de texte" trois fois sans contexte -->
-      <div class="date-group">
-        <p>Date de naissance :</p>
-        <input type="number" formControlName="jour" placeholder="JJ">
-        <input type="number" formControlName="mois" placeholder="MM">
-        <input type="number" formControlName="annee" placeholder="AAAA">
-      </div>
-      <div *ngIf="submitted && (signupForm.get('jour')?.errors || signupForm.get('mois')?.errors || signupForm.get('annee')?.errors)" class="error">
-        Date incorrecte
-      </div>
+      <!-- ERREUR 8 : Bouton sans indication d'état (ne prévient pas si le formulaire est incomplet) -->
+      <button type="submit">Envoyer</button>
   
-      <br>
-      <button type="submit" (click)="onSubmit()">Valider</button>
     </form>
   </div>
