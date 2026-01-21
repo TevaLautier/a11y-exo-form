@@ -17,13 +17,13 @@ export class App {
       nom: ['', Validators.required],
       prenom: ['', Validators.required],
       // Adresse décomposée
-      rue: ['', Validators.required],
-      cp: ['', [Validators.required, Validators.pattern('^[0-9]{5}$')]],
-      ville: ['', Validators.required],
+      rue: [''],
+      cp: ['', [ Validators.pattern('^[0-9]{5}$')]],
+      ville: [''],
       // Date décomposée
-      jj: ['', Validators.required],
-      mm: ['', Validators.required],
-      aaaa: ['', Validators.required]
+      jj: ['', [Validators.required,Validators.min(1),Validators.max(31)]],
+      mm: ['', [Validators.required,Validators.min(1),Validators.max(12)]],
+      aaaa: ['', [Validators.required,Validators.min(1900),Validators.max(2026)]]
     
     });
   }

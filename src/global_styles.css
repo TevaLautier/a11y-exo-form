@@ -1,33 +1,41 @@
-.page-container { max-width: 400px; margin: 40px auto; font-family: sans-serif; }
+.page-container { max-width: 450px; margin: 50px auto; font-family: 'Segoe UI', sans-serif; }
+.pseudo-title { font-size: 28px; font-weight: 800; margin-bottom: 30px; color: #222; }
 
-.pseudo-title { font-size: 2rem; font-weight: bold; margin-bottom: 20px; }
+.section { 
+  margin-bottom: 30px; 
+  padding: 15px; 
+  border: 1px solid #eee; /* On essaie de grouper visuellement mais pas sémantiquement */
+}
 
-.section { margin-bottom: 25px; }
+.field { margin-bottom: 12px; }
 
-.row { display: flex; gap: 10px; margin-top: 5px; }
+/* Les labels ont l'air corrects visuellement */
+label { 
+  display: block; 
+  font-weight: 600; 
+  margin-bottom: 4px; 
+  font-size: 14px; 
+}
 
 input {
   width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  display: block;
+  padding: 8px;
+  border: 1px solid #999;
+  border-radius: 2px;
 }
 
-.label-like { margin-bottom: 2px; font-weight: 600; color: #555; }
+.row { display: flex; gap: 15px; }
+.fake-legend { font-weight: bold; text-transform: uppercase; font-size: 12px; color: #666; margin-bottom: 10px; }
 
-/* ERREUR 9 : L'erreur est indiquée UNIQUEMENT par la couleur rouge */
-.err-msg {
-  color: red;
-  font-size: 0.8rem;
-  margin-top: 5px;
-}
+/* L'erreur n'est visible que par la couleur */
+.err-msg { color: #d32f2f; font-size: 12px; margin-top: 5px; font-weight: bold; }
 
 button {
-  background-color: #007bff;
+  background-color: #222;
   color: white;
-  border: none;
-  padding: 12px 20px;
+  padding: 15px;
   width: 100%;
+  border: none;
+  font-weight: bold;
   cursor: pointer;
 }

@@ -1,52 +1,75 @@
 <div class="page-container">
-    <!-- ERREUR 1 : Pas de H1, utilise un style visuel uniquement -->
-    <div class="pseudo-title">Formulaire d'inscription</div>
+    <div class="pseudo-title">Créer un compte</div>
   
     <form [formGroup]="form" (ngSubmit)="valider()">
       
       <div class="section">
-        <!-- ERREUR 2 : Pas de labels, placeholders uniquement -->
-        <input type="text" formControlName="nom" placeholder="Nom">
-        <input type="text" formControlName="prenom" placeholder="Prénom">
-        
-        <!-- ERREUR 3 : Message d'erreur non explicite et non lié à l'input -->
-        <p class="err-msg" *ngIf="submitted && (form.get('nom')?.errors || form.get('prenom')?.errors)">
-          Champ(s) invalide(s)
-        </p>
-      </div>
+        <div class="field">
+          <label>Nom *</label> 
+          
+          <input type="text" formControlName="nom">
+          <p class="err-msg" *ngIf="submitted && form.get('nom')?.errors">Erreur sur le nom</p>
+        </div>
   
-      <!-- ERREUR 4 : Groupe d'adresse sans structure sémantique (ni fieldset ni legend) -->
-      <div class="section">
-        <p class="label-like">Adresse</p>
-        <input type="text" formControlName="rue" placeholder="Numéro et nom de rue">
-        
-        <div class="row">
-          <!-- ERREUR 5 : Pas d'autocomplete pour aider le remplissage auto -->
-          <input type="text" formControlName="cp" placeholder="Code postal">
-          <input type="text" formControlName="ville" placeholder="Ville">
+        <div class="field">
+          <label>Prénom *</label>
+          <input type="text" formControlName="prenom">
         </div>
         
-        <p class="err-msg" *ngIf="submitted && (form.get('rue')?.errors || form.get('cp')?.errors || form.get('ville')?.errors)">
-          Erreur adresse
-        </p>
+        <p class="err-msg" *ngIf="submitted && form.get('prenom')?.errors">Erreur sur le prénom</p>
       </div>
   
-      <!-- ERREUR 6 : Date de naissance confuse (3 champs sans contexte pour un lecteur d'écran) -->
       <div class="section">
-        <p class="label-like">Date de naissance</p>
-        <div class="row">
-          <input type="number" formControlName="jj" placeholder="JJ">
-          <input type="number" formControlName="mm" placeholder="MM">
-          <input type="number" formControlName="aaaa" placeholder="AAAA">
+        <p class="fake-legend">Coordonnées postales</p>
+        
+        <div class="field">
+          <label>Adresse</label>
+          <input type="text" formControlName="rue">
         </div>
-        <!-- ERREUR 7 : Information d'erreur globale qui ne dit pas quel champ pose problème -->
+  
+        <div class="row">
+          <div class="field">
+            <label>Code Postal</label>
+            <input type="text" formControlName="cp">
+            <p class="err-msg" *ngIf="submitted && form.get('cp')?.errors">Mauvais code postale</p>
+          </div>
+          <div class="field">
+            <label>Ville</label>
+            <input type="text" formControlName="ville">
+          </div>
+        </div>
+      </div>
+  
+      <div class="section">
+        <p class="fake-legend">Date de naissance *</p>
+        
+        <div class="row">
+          <div class="field">
+            <label>Jour *</label>
+            <input type="number" formControlName="jj">
+            <p class="err-msg" *ngIf="submitted && form.get('jj')?.errors">Cette date n'existe pas</p>
+          
+          </div>
+          <div class="field">
+            <label>Mois *</label>
+            <input type="number" formControlName="mm">
+            <p class="err-msg" *ngIf="submitted && form.get('mm')?.errors">Mois incorrect</p>
+          
+          </div>
+          <div class="field">
+            <label>Année *</label>
+            <input type="number" formControlName="aaaa">
+            <p class="err-msg" *ngIf="submitted && form.get('aaaa')?.errors">Année incorrecte</p>
+          
+          </div>
+        </div>
+  
         <p class="err-msg" *ngIf="submitted && form.invalid">
-          Vérifiez la saisie
+          Vérifiez les champs en rouge
         </p>
       </div>
   
-      <!-- ERREUR 8 : Bouton sans indication d'état (ne prévient pas si le formulaire est incomplet) -->
-      <button type="submit">Envoyer</button>
+      <button type="submit">S'inscrire</button>
   
     </form>
   </div>
